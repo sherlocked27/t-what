@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Counter to track the number of active flying bees
     let activeBees = 0;
-    const MAX_BEES = 4; // Maximum number of bees allowed at a time
+    const MAX_BEES = 3; // Maximum number of bees allowed at a time
     
     beeIcons.forEach(bee => {
         bee.addEventListener('click', function(e) {
