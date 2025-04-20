@@ -174,8 +174,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const beeIcons = document.querySelectorAll('.bee-icon');
     const glitterContainer = document.getElementById('glitter-container');
     
+    // Counter to track the number of active flying bees
+    let activeBees = 0;
+    const MAX_BEES = 3; // Maximum number of bees allowed at a time
+    
     beeIcons.forEach(bee => {
         bee.addEventListener('click', function(e) {
+            // Check if we've reached the maximum number of bees
+            if (activeBees >= MAX_BEES) {
+                // Add a subtle shake animation to indicate the limit
+                this.classList.add('shake-animation');
+                setTimeout(() => {
+                    this.classList.remove('shake-animation');
+                }, 500);
+                return;
+            }
+            
+            // Increment active bees counter
+            activeBees++;
+            
             // Create a flying bee
             const flyingBee = document.createElement('div');
             flyingBee.className = 'flying-bee';
@@ -209,6 +226,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (opacity <= 0) {
                 clearInterval(fadeInterval);
                 document.body.removeChild(bee);
+                // Decrement the active bees counter when a bee is removed
+                activeBees--;
             }
         }, 50);
     }
