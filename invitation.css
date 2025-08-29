@@ -7,6 +7,19 @@
         rgba(250,247,242,1) 25%, 
         rgba(75,108,183,0.1) 100%);
     min-height: 100vh;
+    width: 100%;
+    max-width: 100vw;
+    position: relative;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
 }
 
 .invitation-body .particles-container {
@@ -49,14 +62,18 @@
     padding: 80px 2rem 2rem;
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    align-items: flex-start;
+    min-height: calc(100vh - 80px);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .invitation-container {
     max-width: 800px;
     width: 100%;
     position: relative;
+    box-sizing: border-box;
 }
 
 .invitation-card {
@@ -486,6 +503,8 @@
     bottom: 0;
     pointer-events: none;
     overflow: hidden;
+    width: 100%;
+    max-width: 100%;
 }
 
 /* Animations */
@@ -551,10 +570,16 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .invitation-main {
+        padding: 60px 1rem 1rem;
+        min-height: calc(100vh - 60px);
+    }
+    
     .invitation-card {
-        padding: 2rem;
-        margin: 0 1rem;
-        max-width: 90%;
+        padding: 2rem 1.5rem;
+        margin: 0;
+        max-width: 100%;
+        width: 100%;
     }
     
     .invitation-title {
@@ -570,8 +595,9 @@
     }
     
     .photo-carousel {
-        max-width: 320px;
-        height: 240px;
+        max-width: min(320px, 90vw);
+        min-height: 200px;
+        max-height: 240px;
     }
     
     .wedding-details {
@@ -596,13 +622,16 @@
 
 @media (max-width: 480px) {
     .invitation-main {
-        padding: 60px 0.5rem 1rem;
+        padding: 50px 0.75rem 1rem;
+        min-height: calc(100vh - 50px);
     }
     
     .invitation-card {
-        padding: 1.5rem;
+        padding: 1.5rem 1rem;
         border-radius: 15px;
-        max-width: 95%;
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
     }
     
     .invitation-title {
@@ -623,8 +652,9 @@
     }
     
     .photo-carousel {
-        max-width: 280px;
-        height: 200px;
+        max-width: min(280px, 85vw);
+        min-height: 180px;
+        max-height: 200px;
     }
     
     .rsvp-buttons {

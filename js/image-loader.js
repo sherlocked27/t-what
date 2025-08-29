@@ -2,9 +2,9 @@
 class ImageLoader {
     constructor() {
         this.imagePaths = {
-            engagement: 'images/couple/engagement.jpg',
+            engagement: 'images/couple/engagement.jpeg',
             vacation: 'images/couple/something.jpg', 
-            proposal: 'images/couple/proposal.jpg',
+            proposal: 'images/couple/proposal.jpeg',
             date: 'images/couple/date.jpg'
         };
     }
