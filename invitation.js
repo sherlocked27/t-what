@@ -1,5 +1,28 @@
 // Invitation page JavaScript
 document.addEventListener('DOMContentLoaded', function() {
+    // Prevent auto-scroll issues on mobile
+    let isUserScrolling = false;
+    let scrollTimeout;
+    
+    // Detect user scrolling
+    window.addEventListener('scroll', function() {
+        isUserScrolling = true;
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            isUserScrolling = false;
+        }, 150);
+    }, { passive: true });
+    
+    // Prevent programmatic scrolling during user interaction
+    window.addEventListener('touchstart', function() {
+        isUserScrolling = true;
+    }, { passive: true });
+    
+    window.addEventListener('touchend', function() {
+        setTimeout(() => {
+            isUserScrolling = false;
+        }, 300);
+    }, { passive: true });
     // Initialize particles with better interactivity
     if (window.particlesJS) {
         particlesJS('particles-js', {
@@ -63,11 +86,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 detect_on: 'canvas',
                 events: {
                     onhover: {
-                        enable: true,
+                        enable: false,
                         mode: 'repulse'
                     },
                     onclick: {
-                        enable: true,
+                        enable: false,
                         mode: 'push'
                     },
                     resize: true
@@ -129,8 +152,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }, animationDuration);
     }
 
-    // Create floating hearts periodically
-    setInterval(createFloatingHeart, 3000);
+    // Create floating hearts periodically (less frequent on mobile)
+    const heartInterval = window.innerWidth <= 768 ? 5000 : 3000;
+    setInterval(createFloatingHeart, heartInterval);
 
     // RSVP button interactions
     const rsvpButtons = document.querySelectorAll('.rsvp-btn');
@@ -209,8 +233,26 @@ document.addEventListener('DOMContentLoaded', function() {
         showSlide(next);
     }
 
-    // Auto-rotate carousel every 4 seconds
-    setInterval(nextSlide, 4000);
+    // Auto-rotate carousel every 6 seconds (reduced frequency)
+    let carouselInterval = setInterval(nextSlide, 6000);
+    
+    // Pause auto-rotation on touch/interaction
+    let touchStartTime = 0;
+    carousel?.addEventListener('touchstart', function() {
+        clearInterval(carouselInterval);
+        touchStartTime = Date.now();
+    });
+    
+    carousel?.addEventListener('touchend', function() {
+        const touchDuration = Date.now() - touchStartTime;
+        if (touchDuration < 200) { // Quick tap
+            nextSlide();
+        }
+        // Resume auto-rotation after 8 seconds
+        setTimeout(() => {
+            carouselInterval = setInterval(nextSlide, 6000);
+        }, 8000);
+    });
 
     // Dot click handlers
     dots.forEach((dot, index) => {
@@ -219,19 +261,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Carousel click to advance
+    // Carousel click to advance (desktop only)
     const carousel = document.querySelector('.photo-carousel');
     if (carousel) {
-        carousel.addEventListener('click', function() {
-            nextSlide();
-            
-            // Create sparkle effect
-            for (let i = 0; i < 8; i++) {
-                setTimeout(() => {
-                    createSparkle(this);
-                }, i * 100);
-            }
-        });
+        // Only add click handler for non-touch devices
+        if (!('ontouchstart' in window)) {
+            carousel.addEventListener('click', function() {
+                nextSlide();
+                
+                // Create sparkle effect
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => {
+                        createSparkle(this);
+                    }, i * 100);
+                }
+            });
+        }
     }
 
     function createSparkle(element) {

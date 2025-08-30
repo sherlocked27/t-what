@@ -10,6 +10,8 @@
     width: 100%;
     max-width: 100vw;
     position: relative;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
 }
 
 * {
@@ -20,10 +22,13 @@ html, body {
     overflow-x: hidden;
     width: 100%;
     max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    touch-action: pan-y;
 }
 
 .invitation-body .particles-container {
-    pointer-events: all;
+    pointer-events: none;
     z-index: 0;
 }
 
@@ -568,11 +573,68 @@ html, body {
     75% { transform: scale(1.05); }
 }
 
+/* Mobile scroll fixes */
+@media (max-width: 768px) {
+    * {
+        -webkit-overflow-scrolling: touch;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    /* Allow text selection for readable content */
+    .invitation-message p,
+    .detail-content p,
+    .detail-content h3,
+    .invitation-title,
+    .invitation-subtitle,
+    .bride-name,
+    .groom-name {
+        -webkit-user-select: text;
+        -moz-user-select: text;
+        -ms-user-select: text;
+        user-select: text;
+    }
+    
+    /* Prevent scroll interference from animations */
+    .floating-hearts {
+        pointer-events: none;
+        touch-action: none;
+    }
+    
+    /* Ensure carousel doesn't interfere with scrolling */
+    .photo-carousel {
+        touch-action: manipulation;
+        will-change: auto; /* Prevent unnecessary GPU acceleration */
+    }
+    
+    .carousel-dots {
+        touch-action: manipulation;
+    }
+    
+    /* Prevent layout shifts during animations */
+    .photo-slide {
+        will-change: opacity;
+    }
+    
+    .floating-hearts {
+        will-change: auto;
+    }
+    
+    /* Stable heights to prevent scroll jumping */
+    .invitation-card {
+        contain: layout style;
+    }
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .invitation-main {
         padding: 60px 1rem 1rem;
         min-height: calc(100vh - 60px);
+        touch-action: pan-y;
     }
     
     .invitation-card {
@@ -624,6 +686,7 @@ html, body {
     .invitation-main {
         padding: 50px 0.75rem 1rem;
         min-height: calc(100vh - 50px);
+        touch-action: pan-y;
     }
     
     .invitation-card {
