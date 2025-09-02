@@ -1,30 +1,14 @@
 // Invitation page JavaScript
 document.addEventListener('DOMContentLoaded', function() {
-    // Prevent auto-scroll issues on mobile
-    let isUserScrolling = false;
-    let scrollTimeout;
+    // Mobile detection
+    const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window;
     
-    // Detect user scrolling
-    window.addEventListener('scroll', function() {
-        isUserScrolling = true;
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-            isUserScrolling = false;
-        }, 150);
-    }, { passive: true });
-    
-    // Prevent programmatic scrolling during user interaction
-    window.addEventListener('touchstart', function() {
-        isUserScrolling = true;
-    }, { passive: true });
-    
-    window.addEventListener('touchend', function() {
-        setTimeout(() => {
-            isUserScrolling = false;
-        }, 300);
-    }, { passive: true });
-    // Initialize particles with better interactivity
-    if (window.particlesJS) {
+    // Prevent scroll restoration issues on mobile
+    if (isMobile && 'scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    // Initialize particles (disabled on mobile for better performance)
+    if (window.particlesJS && !isMobile) {
         particlesJS('particles-js', {
             particles: {
                 number: {
@@ -153,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Create floating hearts periodically (less frequent on mobile)
-    const heartInterval = window.innerWidth <= 768 ? 5000 : 3000;
+    const heartInterval = isMobile ? 8000 : 4000;
     setInterval(createFloatingHeart, heartInterval);
 
     // RSVP button interactions
@@ -233,26 +217,36 @@ document.addEventListener('DOMContentLoaded', function() {
         showSlide(next);
     }
 
-    // Auto-rotate carousel every 6 seconds (reduced frequency)
-    let carouselInterval = setInterval(nextSlide, 6000);
+    // Auto-rotate carousel (longer intervals, simpler touch handling)
+    let carouselInterval = setInterval(nextSlide, 3500);
     
-    // Pause auto-rotation on touch/interaction
-    let touchStartTime = 0;
-    carousel?.addEventListener('touchstart', function() {
-        clearInterval(carouselInterval);
-        touchStartTime = Date.now();
-    });
-    
-    carousel?.addEventListener('touchend', function() {
-        const touchDuration = Date.now() - touchStartTime;
-        if (touchDuration < 200) { // Quick tap
-            nextSlide();
-        }
-        // Resume auto-rotation after 8 seconds
-        setTimeout(() => {
-            carouselInterval = setInterval(nextSlide, 6000);
-        }, 8000);
-    });
+    // Simplified touch handling for carousel
+    if (carousel && isMobile) {
+        let touchStartX = 0;
+        let touchStartTime = 0;
+        
+        carousel.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+            touchStartTime = Date.now();
+            clearInterval(carouselInterval);
+        }, { passive: true });
+        
+        carousel.addEventListener('touchend', function(e) {
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchDuration = Date.now() - touchStartTime;
+            const swipeDistance = Math.abs(touchEndX - touchStartX);
+            
+            // Only handle as tap if it's quick and doesn't move much
+            if (touchDuration < 300 && swipeDistance < 30) {
+                nextSlide();
+            }
+            
+            // Resume auto-rotation after longer delay
+            setTimeout(() => {
+                carouselInterval = setInterval(nextSlide, 8000);
+            }, 10000);
+        }, { passive: true });
+    }
 
     // Dot click handlers
     dots.forEach((dot, index) => {
