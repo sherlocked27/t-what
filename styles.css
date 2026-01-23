@@ -17,7 +17,8 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     min-height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     position: relative;
 }
 
@@ -53,8 +54,15 @@ main {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .names {
@@ -68,7 +76,8 @@ main {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    white-space: nowrap; /* Prevent line breaks */
+    white-space: nowrap;
+    /* Prevent line breaks */
 }
 
 .wedding-info {
@@ -111,7 +120,8 @@ main {
     display: inline-block;
 }
 
-.date::before, .date::after {
+.date::before,
+.date::after {
     content: '';
     position: absolute;
     height: 1px;
@@ -187,17 +197,51 @@ main {
     font-size: 1rem;
     font-weight: 500;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255,149,128,0.3);
+    box-shadow: 0 4px 15px rgba(255, 149, 128, 0.3);
     letter-spacing: 1px;
 }
 
 .invitation-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(255,149,128,0.4);
+    box-shadow: 0 8px 25px rgba(255, 149, 128, 0.4);
     filter: brightness(1.1);
 }
 
 .invitation-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.memories-link {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.memories-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 30px;
+    background: linear-gradient(45deg, #ff6b9d, #ffa0c0);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+    letter-spacing: 1px;
+}
+
+.memories-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+    filter: brightness(1.1);
+}
+
+.memories-btn svg {
     width: 20px;
     height: 20px;
 }
@@ -258,7 +302,7 @@ main {
     position: absolute;
     width: 8px;
     height: 8px;
-    background: radial-gradient(circle, rgba(255,213,79,1) 0%, rgba(255,193,7,0.6) 100%);
+    background: radial-gradient(circle, rgba(255, 213, 79, 1) 0%, rgba(255, 193, 7, 0.6) 100%);
     border-radius: 50%;
     pointer-events: none;
     z-index: 99;
@@ -269,7 +313,7 @@ main {
     position: absolute;
     width: 8px;
     height: 8px;
-    background: radial-gradient(circle, rgba(255,213,79,1) 0%, rgba(255,193,7,0.8) 100%);
+    background: radial-gradient(circle, rgba(255, 213, 79, 1) 0%, rgba(255, 193, 7, 0.8) 100%);
     border-radius: 50%;
     pointer-events: none;
     z-index: 99;
@@ -292,10 +336,12 @@ main {
         opacity: 1;
         transform: scale(0);
     }
+
     50% {
         opacity: 0.8;
         transform: scale(1);
     }
+
     100% {
         opacity: 0;
         transform: scale(0.5);
@@ -304,54 +350,71 @@ main {
 
 /* Shake animation for when the bee limit is reached */
 @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-    20%, 40%, 60%, 80% { transform: translateX(5px); }
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translateX(-5px);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translateX(5px);
+    }
 }
 
 .shake-animation {
-    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+    animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
 }
 
 @media (max-width: 768px) {
     .content-container {
         padding: 2.5rem;
     }
-    
+
     .names {
         font-size: 3.5rem;
     }
-    
+
     .countdown-container {
         gap: 1rem;
     }
-    
+
     .countdown-value {
         font-size: 2.5rem;
     }
-    
+
     .countdown-label {
         font-size: 0.7rem;
     }
-    
+
     .profession-icon {
         width: 32px;
         height: 32px;
     }
-    
+
     .couple-info {
         gap: 2rem;
     }
-    
+
     .ampersand {
         font-size: 2rem;
     }
-    
+
     .bee-icon {
         width: 32px;
         height: 32px;
     }
-    
+
     .flying-bee {
         width: 32px;
         height: 32px;
@@ -362,59 +425,60 @@ main {
     .content-container {
         padding: 2rem 1.5rem;
     }
-    
+
     .names {
         font-size: 2.5rem;
         white-space: nowrap;
     }
-    
+
     .wedding-info {
         font-size: 1rem;
     }
-    
+
     .countdown-container {
         gap: 0.7rem;
     }
-    
+
     .countdown-value {
         font-size: 2rem;
     }
-    
-    .date::before, .date::after {
+
+    .date::before,
+    .date::after {
         width: 30px;
     }
-    
+
     .date::before {
         left: -40px;
     }
-    
+
     .date::after {
         right: -40px;
     }
-    
+
     .couple-info {
         gap: 1.5rem;
     }
-    
+
     .profession-icon {
         width: 28px;
         height: 28px;
     }
-    
+
     .ampersand {
         font-size: 1.8rem;
     }
-    
+
     .content-container {
         max-width: 100%;
         margin: 0 15px;
     }
-    
+
     .bee-icon {
         width: 28px;
         height: 28px;
     }
-    
+
     .flying-bee {
         width: 28px;
         height: 28px;
@@ -425,24 +489,65 @@ main {
     .content-container {
         padding: 1.5rem 1rem;
     }
-    
+
     .names {
         font-size: 2rem;
     }
-    
+
     .wedding-info {
         font-size: 0.9rem;
     }
-    
+
     .countdown-container {
         gap: 0.5rem;
     }
-    
+
     .countdown-value {
         font-size: 1.8rem;
     }
-    
+
     .countdown-label {
         font-size: 0.6rem;
     }
-} 
+}
+
+/* Celebration Button Styles */
+.celebrate-btn {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    border: none;
+    padding: 12px 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #fff;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 105, 135, 0.3);
+    transition: all 0.3s ease;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    animation: pulse 2s infinite;
+}
+
+.celebrate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 105, 135, 0.5);
+    background: linear-gradient(135deg, #ff8a8e 0%, #fdbfdf 99%, #fdbfdf 100%);
+}
+
+.celebrate-btn:active {
+    transform: translateY(1px);
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 154, 158, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 154, 158, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 154, 158, 0);
+    }
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whispers of Us - Our Journey Together</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Dancing+Script:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="whispers-of-us.css">
+</head>
+
+<body>
+    <!-- Password Protection Screen -->
+    <div id="password-screen" class="password-screen">
+        <div class="password-container">
+            <h1 class="password-title">Whispers of Us</h1>
+            <p class="password-subtitle">A collection of moments woven through time</p>
+            <div class="password-box">
+                <input type="password" id="password-input" placeholder="Enter the secret key..." autocomplete="off">
+                <button id="unlock-btn" class="unlock-btn">Unlock Our Memories</button>
+                <p id="error-message" class="error-message"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timeline Content (Hidden initially) -->
+    <div id="timeline-content" class="timeline-content hidden">
+        <div class="timeline-header">
+            <h1 class="timeline-title">Whispers of Us</h1>
+            <p class="timeline-tagline">Every photograph is a thread in the tapestry of our love</p>
+        </div>
+
+        <div class="timeline-container">
+            <!-- Memory Lane - Add 2-3 photos per row for organic scrapbook feel -->
+            <!-- Example structure for adding memories:
+            <div class="timeline-item">
+                <div class="memory-card">
+                    <div class="photo-frame">
+                        <img src="path/to/photo.jpg" alt="Description">
+                    </div>
+                    <p class="caption">Your beautiful caption here...</p>
+                </div>
+                <div class="memory-card">
+                    <div class="photo-frame">
+                        <img src="path/to/photo2.jpg" alt="Description">
+                    </div>
+                    <p class="caption">Another caption...</p>
+                </div>
+            </div>
+            -->
+
+            <!-- Row 1: First two memories -->
+            <div class="timeline-item">
+                <div class="memory-card">
+                    <div class="photo-frame">
+                        <img src="images/couple/proposal.jpeg" alt="Our first moment">
+                    </div>
+                    <p class="caption">Where our forever began, under the stars and whispered promises...</p>
+                </div>
+                <div class="memory-card">
+                    <div class="photo-frame">
+                        <img src="images/couple/engagement.jpeg" alt="Beautiful memory">
+                    </div>
+                    <p class="caption">Two souls, one journey, infinite love...</p>
+                </div>
+            </div>
+
+            <!-- Row 2: Next two memories -->
+            <div class="timeline-item">
+                <div class="memory-card">
+                    <div class="photo-frame">
+                        <img src="images/couple/date.jpg" alt="Precious moment">
+                    </div>
+                    <p class="caption">In your eyes, I found my home...</p>
+                </div>
+                <div class="memory-card">
+                    <div class="photo-frame">
+                        <img src="images/couple/something.jpg" alt="Special moment">
+                    </div>
+                    <p class="caption">Every laugh, every smile, every moment with you is a treasure...</p>
+                </div>
+            </div>
+
+            <!-- Video Gallery Section -->
+            <div class="video-section">
+                <h2 class="section-title">Motion of Our Love</h2>
+                <p class="section-subtitle">Moments captured in time and sound...</p>
+
+                <div class="video-grid">
+                    <!-- Video Card 1 -->
+                    <div class="video-card">
+                        <div class="video-frame">
+                            <!-- Replace 'src' with your Instagram embed URL -->
+                            <!-- Example: https://www.instagram.com/p/CODE/embed -->
+                            <iframe src="https://www.instagram.com/p/C_q8O8zSyqV/embed" width="400" height="480"
+                                frameborder="0" scrolling="no" allowtransparency="true">
+                            </iframe>
+                        </div>
+                        <p class="caption">Our Wedding Highlights</p>
+                    </div>
+
+                    <!-- Video Card 2 -->
+                    <div class="video-card">
+                        <div class="video-frame">
+                            <iframe src="https://www.instagram.com/p/DAKBTXZyCVL/embed" width="400" height="480"
+                                frameborder="0" scrolling="no" allowtransparency="true">
+                            </iframe>
+                        </div>
+                        <p class="caption">The First Dance</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- End marker -->
+            <div class="timeline-end">
+                <div class="timeline-dot final-dot"></div>
+                <p class="end-message">And so the story continues...</p>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-home">← Back to Home</a>
+    </div>
+
+    <script src="whispers-of-us.js"></script>
+</body>
+
+</html>

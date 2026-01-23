@@ -1,0 +1,627 @@
+:root {
+    --primary-color: #ff6b9d;
+    --secondary-color: #ffd6e8;
+    --text-dark: #2c2c2c;
+    --text-light: #666;
+    --background: #fff9f9;
+    --rope-color: #d4a574;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #fff9f9 0%, #ffe8f0 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ========== Password Screen ========== */
+.password-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ff6b9d 0%, #ffa0c0 50%, #ffd6e8 100%);
+    z-index: 1000;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.password-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.password-container {
+    text-align: center;
+    animation: fadeInUp 1s ease;
+}
+
+.password-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: white;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.password-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 3rem;
+}
+
+.password-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+#password-input {
+    width: 350px;
+    padding: 15px 25px;
+    font-size: 1.1rem;
+    border: 2px solid white;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s ease;
+}
+
+#password-input:focus {
+    outline: none;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+}
+
+.unlock-btn {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    color: var(--primary-color);
+    background: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.unlock-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+}
+
+.error-message {
+    color: white;
+    font-size: 0.9rem;
+    min-height: 20px;
+    margin-top: 0.5rem;
+    font-weight: 500;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== Timeline Content ========== */
+.timeline-content {
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+    transition: opacity 0.5s ease;
+}
+
+.timeline-content.hidden {
+    display: none;
+}
+
+.timeline-header {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: fadeInUp 1s ease;
+}
+
+.timeline-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--text-light);
+}
+
+/* ========== Memory Lane Structure ========== */
+.timeline-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    padding: 40px 20px;
+}
+
+/* Decorative rope running through */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+            var(--rope-color),
+            var(--rope-color) 15px,
+            transparent 15px,
+            transparent 25px);
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: 0;
+    opacity: 0.3;
+}
+
+.timeline-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+    position: relative;
+    animation: fadeInUp 0.8s ease backwards;
+}
+
+.timeline-item:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.timeline-item:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.timeline-item:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.timeline-item:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+.timeline-item:nth-child(5) {
+    animation-delay: 1s;
+}
+
+/* Hide the old timeline elements */
+.timeline-dot,
+.timeline-rope {
+    display: none;
+}
+
+/* Memory Card - Scrapbook Style */
+.memory-card {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 8px 25px var(--shadow);
+    transition: all 0.4s ease;
+    width: 320px;
+    position: relative;
+}
+
+/* Staggered positioning for organic feel */
+.timeline-item .memory-card:nth-child(1) {
+    margin-top: 0;
+    transform: rotate(-2deg);
+}
+
+.timeline-item .memory-card:nth-child(2) {
+    margin-top: 40px;
+    transform: rotate(1.5deg);
+}
+
+.timeline-item .memory-card:nth-child(3) {
+    margin-top: 20px;
+    transform: rotate(-1deg);
+}
+
+.memory-card:hover {
+    transform: translateY(-10px) rotate(0deg) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+/* Pin effect on top of card */
+.memory-card::before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+    z-index: 5;
+}
+
+.memory-card::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-6px);
+    z-index: 6;
+}
+
+.photo-frame {
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    position: relative;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.photo-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.05), rgba(255, 214, 232, 0.05));
+    pointer-events: none;
+    z-index: 1;
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.memory-card:hover .photo-frame img {
+    transform: scale(1.08);
+}
+
+/* Caption Styling - Script Font */
+.caption {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    line-height: 1.6;
+    text-align: center;
+    padding: 5px 10px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Timeline End */
+.timeline-end {
+    text-align: center;
+    margin-top: 40px;
+    position: relative;
+    animation: fadeInUp 1s ease 1.2s backwards;
+}
+
+.final-dot {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background: var(--primary-color);
+    border: 5px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px var(--secondary-color);
+    margin: 0 auto 20px;
+    animation: pulse 2s ease infinite;
+}
+
+.end-message {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Back Home Link */
+.back-home {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 12px 25px;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px var(--shadow);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.back-home:hover {
+    transform: translateX(-5px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ========== Animations ========== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 5px var(--secondary-color);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 10px var(--secondary-color);
+    }
+}
+
+/* ========== Responsive Design ========== */
+@media (max-width: 1024px) {
+    .timeline-item {
+        gap: 20px;
+    }
+
+    .memory-card {
+        width: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .password-title {
+        font-size: 2.5rem;
+    }
+
+    .password-subtitle {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+
+    #password-input {
+        width: 280px;
+        font-size: 1rem;
+    }
+
+    .timeline-title {
+        font-size: 2.5rem;
+    }
+
+    .timeline-tagline {
+        font-size: 1rem;
+        padding: 0 20px;
+    }
+
+    .timeline-container {
+        padding: 20px 10px;
+    }
+
+    .timeline-container::before {
+        opacity: 0.2;
+    }
+
+    /* Single column on tablet */
+    .timeline-item {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .memory-card {
+        width: 90%;
+        max-width: 400px;
+    }
+
+    /* Reset staggered margins for mobile */
+    .timeline-item .memory-card:nth-child(1),
+    .timeline-item .memory-card:nth-child(2),
+    .timeline-item .memory-card:nth-child(3) {
+        margin-top: 0;
+        transform: rotate(0deg);
+    }
+
+    .memory-card:hover {
+        transform: translateY(-5px) scale(1.02);
+    }
+
+    .photo-frame {
+        height: 300px;
+    }
+
+    .caption {
+        font-size: 1.2rem;
+    }
+
+    .end-message {
+        font-size: 1.4rem;
+    }
+
+    .back-home {
+        top: 15px;
+        left: 15px;
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .password-title {
+        font-size: 2rem;
+    }
+
+    #password-input {
+        width: 240px;
+    }
+
+    .timeline-title {
+        font-size: 2rem;
+    }
+
+    .memory-card {
+        width: 95%;
+    }
+
+    .photo-frame {
+        height: 250px;
+    }
+
+    .caption {
+        font-size: 1.1rem;
+    }
+}
+
+/* ========== Video Gallery Section ========== */
+.video-section {
+    margin-top: 80px;
+    margin-bottom: 60px;
+    text-align: center;
+    position: relative;
+    padding: 40px 0;
+    /* Subtle background to differentiate section */
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.4), transparent);
+    border-radius: 30px;
+}
+
+.section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    color: var(--primary-color);
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.section-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-bottom: 3rem;
+}
+
+.video-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+/* Premium Video Card */
+.video-card {
+    background: white;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px var(--shadow);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 380px;
+    /* Slightly wider for video comfortable viewing */
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+    /* Animation initial state */
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.video-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(255, 107, 157, 0.15);
+}
+
+/* Golden frame effect */
+.video-frame {
+    width: 100%;
+    /* Instagram vertical aspect ratio usually 4:5 or 9:16. 
+       We set height to accommodate. 
+       Instagram embeds are often fixed width/height so we handle overflow */
+    height: 520px;
+    overflow: hidden;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    position: relative;
+    background: #000;
+    /* Black background for cinema feel */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.video-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    /* Ensure iframe covers the area */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Decorative elements for video card */
+.video-card::before {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border-radius: 25px;
+    background: linear-gradient(45deg, var(--primary-color), transparent, var(--secondary-color));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.video-card:hover::before {
+    opacity: 0.3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .video-card {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .video-frame {
+        height: 450px;
+    }
+
+    .section-title {
+        font-size: 2.2rem;
+    }
+}
