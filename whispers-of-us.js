@@ -6,7 +6,7 @@
 // 3. Copy the hash output
 // 4. Replace the STORED_PASSWORD_HASH value below with the new hash
 
-const STORED_PASSWORD_HASH = "cfe730e46ecc2adc2adc7c1b22733310bbcfe972ce80e41ffab6c8f2629059de"; // "forever"
+const STORED_PASSWORD_HASH = "2070f725ff1c765b73c498de52bc419377979691f6100de3ed99794aeb40d988"; // "forever"
 
 // ========== Password Hashing Function ==========
 async function hashPassword(password) {
